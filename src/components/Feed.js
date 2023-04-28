@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
 import Navbar from "./Navbar";
-import SearchBar from "./SearchBar";
+
 
 function Feed(){
     const [posts, setPosts] = useState([]);
@@ -45,7 +45,7 @@ function Feed(){
       <div>
       
       <Navbar />
-        <div class="grid h-screen container place-items-center">
+        <div class="grid  gap-2 max-w-xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden my-8">
           <FlipMove>
             {posts.map(post => (
                 <Post 
@@ -53,8 +53,8 @@ function Feed(){
                 displayName={post.displayName}
                 verified={post.verified}
                 text={post.text}
-                timestamp={post.timestamp}
-                image={post.url}
+                timestamp={new Date(post.timestamp.seconds * 1000).toLocaleDateString("en-US")}
+                image={new Date(post.url.seconds * 1000).toLocaleDateString("en-US")}
                 
                 />
             ))}

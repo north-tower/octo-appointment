@@ -5,7 +5,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { ref, getDownloadURL, uploadBytes } from "firebase/storage"
 import Navbar from './Navbar';
+import DatePicker from "react-datepicker";
 
+import "react-datepicker/dist/react-datepicker.css";
 
 function TextBox(){
     const [ textMessage,setTextMessage ] = useState("");
@@ -16,6 +18,7 @@ function TextBox(){
     const date = new Date(timestamp);
     const [user, loading, error] = useAuthState(auth);
     const [userName, setUserName] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
     
     const fetchUserName = async () => {
         try {
@@ -42,13 +45,14 @@ function TextBox(){
             displayName:userName,
             username:"Tets",
             verified:true,
-            url:textImage,
+            url:startDate,
             text:textMessage,
             timestamp:dateFormat,
 
         });
         setTextMessage("");
     setTextImage("");
+    navigate('/success')
     }
 
     const [urls, setUrls] = useState([]);
@@ -71,8 +75,8 @@ function TextBox(){
             displayName:userName,
             username:userName,
             verified: true,
-            url : downloadURL,
-            text : textImage,
+            url :" downloadURL",
+            text : textMessage,
             timestamp:dateFormat
           }
         )
@@ -83,31 +87,43 @@ function TextBox(){
     return (
       <>
       <Navbar />
-      <section class="bg-gray-50 dark:bg-gray-900">
-        <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-           <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div  class="p-6 space-y-4 md:space-y-6 sm:p-8">
+      <section class="bg-gray-50 h-screen dark:bg-gray-900">
+        <div class="max-w-xl h- mx-auto bg-white shadow-lg rounded-lg  my-8">
+          
+            <div  class="p-6 space-y-4 md:space-y-6 sm:p-8 ">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-                    Upload
+                    Book Appointment
               </h1>
-            <label for="formFile" class="form-label inline-block mb-2 text-gray-700"
-            >Choose a photo to upload</label>
-              <form class="space-y-4 md:space-y-6" name='upload_file' onSubmit={handleSubmit}>
-                <div>
+            
+              <form class="space-y-4 md:space-y-6" name='upload_file' onSubmit={sendPost}>
+                {/* <div>
                   <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload file</label>
                   <input type='file' class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" />
-                </div>
+                </div> */}
                 <div class="mb-6">
                   <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                  <input type='text' value={textImage} onChange={(e) => setTextImage(e.target.value)}
-                  class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                  <input type='text' value={textMessage} onChange={(e) => setTextMessage(e.target.value)}
+                  class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 
+                  focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                 </div>
-                <button type='submit'  onClick={() => navigate(-1)}
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full mt-4 py-2 px-4 border border-blue-700 rounded">Upload</button>
+                
+<div class="relative max-w-sm">
+  
+  <label for="formFile" class="form-label inline-block mb-2 text-gray-700"
+            >Date of the Appointment</label>
+ <DatePicker
+  selected={startDate}
+  onChange={(date) => setStartDate(date)} style={{   zindex: 9999  }}
+  className="block w-full mt-1 py-2 px-3 border z-10 border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+/>
+
+</div>
+
+                <button type='submit'  class="bg-blue-500 hover:bg-blue-700 text-white font-bold w-full mt-4 py-2 px-4 border border-blue-700 rounded">Book</button>
                </form>
     </div>
         </div>   
-    </div>
+    
     </section>
     </>
     )
