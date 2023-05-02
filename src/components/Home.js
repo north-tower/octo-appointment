@@ -21,7 +21,10 @@ function Home() {
             </a>
         </div>
         <div>
+        <a  href="#" onClick={()=>navigate('/about')} >
+
             <img class="h-auto max-w-full rounded-lg" src="https://www.svgrepo.com/show/511200/users-group.svg" alt=""></img>
+            </a>
         </div>
         <div>
             <img class="h-auto max-w-full rounded-lg" src="https://www.svgrepo.com/show/438410/cost-round.svg" alt=""></img>

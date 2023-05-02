@@ -1,11 +1,10 @@
-import { auth, db, logout } from "./firebase"; 
-import { Link, useNavigate } from "react-router-dom";
+import {  logout } from "./firebase"; 
+import {  useNavigate } from "react-router-dom";
 import { useState } from 'react';
 import { Transition } from "@headlessui/react";
 
 export default function Navbar() {
   const navigate = useNavigate();
-  const [navbar, setNavbar] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
     
   return (
@@ -39,7 +38,7 @@ export default function Navbar() {
                   </a>
 
                   <a
-                    href="#"
+                    href="#"  onClick={()=>navigate('/about')}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     About
