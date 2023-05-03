@@ -42,7 +42,9 @@ const signInWithGoogle = async () => {
   }
 };
 
-const logInWithEmailAndPassword = async (email, password) => {
+const logInWithEmailAndPassword = async (event, email, password) => {
+  event.preventDefault(); // Prevent default form submission behavior
+
   try {
     await signInWithEmailAndPassword(auth, email, password);
   } catch (err) {
@@ -50,6 +52,7 @@ const logInWithEmailAndPassword = async (email, password) => {
     alert(err.message);
   }
 };
+
 
 const registerWithEmailAndPassword = async (name, email, password) => {
   try {
@@ -79,6 +82,7 @@ const sendPasswordReset = async (email) => {
 
 const logout = () => {
   signOut(auth);
+  window.location.href = '/';
 };
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional

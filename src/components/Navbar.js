@@ -34,7 +34,7 @@ export default function Navbar() {
                     href="#" onClick={()=>navigate('/post')}
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
-                    Upload
+                    Book
                   </a>
 
                   <a
@@ -52,7 +52,7 @@ export default function Navbar() {
                   </a>
 
                   <a
-                    href="#" onClick={logout}
+                    href="#" onClick={logout } 
                     className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
                   >
                     Sign Out
